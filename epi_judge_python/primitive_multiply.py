@@ -2,8 +2,13 @@ from test_framework import generic_test
 
 
 def multiply(x: int, y: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    m = 1
+    r = 0
+    for b in range(64):
+        if y & m:
+            r += x << b
+        m <<= 1
+    return r
 
 
 if __name__ == '__main__':
