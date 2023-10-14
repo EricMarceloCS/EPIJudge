@@ -2,8 +2,20 @@ from test_framework import generic_test
 
 
 def is_palindrome_number(x: int) -> bool:
-    # TODO - you fill in here.
-    return True
+    if x < 0:
+        return False
+    if x < 10:
+        return True
+    v = x
+    r = 0
+    while v:
+        r *= 10
+        r += v % 10
+        v //= 10
+    if r == x:
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
