@@ -8,7 +8,17 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def even_odd(A: List[int]) -> None:
-    # TODO - you fill in here.
+    t = 0
+    s = 1
+    while s < len(A):
+        if A[t] % 2 == 0:
+            t += 1
+        elif A[s] % 2 == 0:
+            temp = A[s]
+            A[s] = A[t]
+            A[t] = temp
+            t += 1
+        s += 1
     return
 
 
