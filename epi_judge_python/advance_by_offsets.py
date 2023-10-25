@@ -4,8 +4,14 @@ from test_framework import generic_test
 
 
 def can_reach_end(A: List[int]) -> bool:
-    # TODO - you fill in here.
-    return True
+
+    p, g = 0, len(A) - 1
+    i = 0
+    while i <= p and i < g:
+        p = max(p, i + A[i])
+        i += 1
+
+    return p >= g
 
 
 if __name__ == '__main__':
