@@ -7,7 +7,18 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def rearrange(A: List[int]) -> None:
-    # TODO - you fill in here.
+    A.sort()
+    m = len(A) // 2
+    i, j = 1, m
+    while i < j:
+        v = A[j]
+        A.pop(j)
+        A.insert(i, v)
+        i += 2
+        j += 1
+    if i < len(A) - 1:
+        A[i], A[i+1] = A[i+1], A[i]
+
     return
 
 
