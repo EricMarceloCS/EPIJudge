@@ -9,9 +9,9 @@ def binary_tree_depth_order(tree: BinaryTreeNode) -> List[List[int]]:
     q1: List = [tree]
     q2: List = []
 
-    while q1:
+    while len(q1) > 0:
         l = []
-        while q1:
+        while len(q1) > 0:
             n = q1.pop(0)
             if n:
                 if n and n.left:
@@ -24,7 +24,7 @@ def binary_tree_depth_order(tree: BinaryTreeNode) -> List[List[int]]:
             r.append(l)
         l = []
 
-        while q2:
+        while len(q2) > 0:
             n = q2.pop(0)
             if n:
                 if n.left:
