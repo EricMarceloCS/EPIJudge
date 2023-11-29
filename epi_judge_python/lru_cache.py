@@ -3,21 +3,47 @@ from test_framework.test_failure import TestFailure
 
 
 class LruCache:
+    lruQueue = []
+    hm = {}
+    cs: int
+
     def __init__(self, capacity: int) -> None:
-        # TODO - you fill in here.
+        self.cs = capacity
         return
 
     def lookup(self, isbn: int) -> int:
-        # TODO - you fill in here.
-        return 0
+        try:
+            price = self.hm[isbn]
+            self.lruQueue.remove(isbn)
+            self.lruQueue.append(isbn)
+            return price
+        except KeyError:
+            return -1
 
     def insert(self, isbn: int, price: int) -> None:
-        # TODO - you fill in here.
+        try:
+            if self.hm[isbn]:
+                self.lruQueue.remove(isbn)
+        except KeyError:
+            self.hm[isbn] = price
+
+        self.lruQueue.append(isbn)
+
+        if len(self.hm) > self.cs:
+            try:
+                lru = self.lruQueue.pop(0)
+                del self.hm[lru]
+            except KeyError:
+                pass
         return
 
     def erase(self, isbn: int) -> bool:
-        # TODO - you fill in here.
-        return True
+        try:
+            del self.hm[isbn]
+            self.lruQueue.remove(isbn)
+            return True
+        except KeyError:
+            return False
 
 
 def lru_cache_tester(commands):
@@ -41,6 +67,9 @@ def lru_cache_tester(commands):
                                   str(result))
         else:
             raise RuntimeError('Unexpected command ' + cmd[0])
+
+    cache.hm.clear()
+    cache.lruQueue.clear()
 
 
 if __name__ == '__main__':
