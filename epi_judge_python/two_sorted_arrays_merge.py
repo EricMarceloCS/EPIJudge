@@ -5,7 +5,21 @@ from test_framework import generic_test
 
 def merge_two_sorted_arrays(A: List[int], m: int, B: List[int],
                             n: int) -> None:
-    # TODO - you fill in here.
+    ia = 0
+    ib = 0
+    while ia < len(A) and ib < len(B):
+        if A[ia] == 0 and m <= 0:
+            A[ia] = B[ib]
+            ia += 1
+            ib += 1
+        elif A[ia] > B[ib]:
+            A.insert(ia, B[ib])
+            ia += 1
+            ib += 1
+            A.pop()
+        else:
+            m -= 1
+            ia += 1
     return
 
 
