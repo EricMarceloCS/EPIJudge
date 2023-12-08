@@ -3,8 +3,15 @@ from test_framework import generic_test
 
 
 def is_binary_tree_bst(tree: BinaryTreeNode) -> bool:
-    # TODO - you fill in here.
-    return True
+    def recurse(tree, low=float('-inf'), high=float('inf')) -> bool:
+        if not tree:
+            return True
+        if tree.data < low or tree.data > high:
+            return False
+        else:
+            return recurse(tree.left, low, tree.data) and recurse(tree.right, tree.data, high)
+
+    return recurse(tree)
 
 
 if __name__ == '__main__':
