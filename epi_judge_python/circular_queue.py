@@ -3,21 +3,24 @@ from test_framework.test_failure import TestFailure
 
 
 class Queue:
+    queue_capacity: int
+    cir_queue = []
+
     def __init__(self, capacity: int) -> None:
-        # TODO - you fill in here.
+        self.queue_capacity = capacity
         return
 
     def enqueue(self, x: int) -> None:
-        # TODO - you fill in here.
+        self.cir_queue.append(x)
         return
 
     def dequeue(self) -> int:
-        # TODO - you fill in here.
+        if len(self.cir_queue) > 0:
+            return self.cir_queue.pop(0)
         return 0
 
     def size(self) -> int:
-        # TODO - you fill in here.
-        return 0
+        return len(self.cir_queue)
 
 
 def queue_tester(ops):
