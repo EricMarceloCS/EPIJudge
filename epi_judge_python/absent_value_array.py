@@ -5,7 +5,18 @@ from test_framework.test_failure import TestFailure
 
 
 def find_missing_element(stream: Iterator[int]) -> int:
-    # TODO - you fill in here.
+    ip = []
+    while True:
+        try:
+            ip.append(stream.__next__())
+        except StopIteration:
+            break
+
+    ip.sort()
+    for i in range(1, len(ip)):
+        if ip[i] - ip[i-1] > 1:
+            return ip[i] - 1
+
     return 0
 
 
