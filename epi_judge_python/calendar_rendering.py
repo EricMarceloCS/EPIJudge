@@ -10,8 +10,38 @@ Event = collections.namedtuple('Event', ('start', 'finish'))
 
 
 def find_max_simultaneous_events(A: List[Event]) -> int:
-    # TODO - you fill in here.
-    return 0
+    if len(A) == 1:
+        return 1
+    begin = []
+    end = []
+    count = 0
+    max_simultaneous_events = 0
+
+    for e in A:
+        begin.append(e.start)
+        end.append(e.finish)
+
+    begin.sort()
+    end.sort()
+
+    b = begin.pop(0)
+    e = end.pop(0)
+    while begin or end:
+        try:
+            if b <= e:
+                count += 1
+                b = begin.pop(0)
+            else:
+                count -= 1
+                e = end.pop(0)
+        except IndexError:
+            if count > max_simultaneous_events:
+                max_simultaneous_events = count
+            break
+        if count > max_simultaneous_events:
+            max_simultaneous_events = count
+
+    return max_simultaneous_events
 
 
 @enable_executor_hook
