@@ -30,16 +30,14 @@ def find_max_simultaneous_events(A: List[Event]) -> int:
         try:
             if b <= e:
                 count += 1
+                if count > max_simultaneous_events:
+                    max_simultaneous_events = count
                 b = begin.pop(0)
             else:
                 count -= 1
                 e = end.pop(0)
         except IndexError:
-            if count > max_simultaneous_events:
-                max_simultaneous_events = count
             break
-        if count > max_simultaneous_events:
-            max_simultaneous_events = count
 
     return max_simultaneous_events
 
